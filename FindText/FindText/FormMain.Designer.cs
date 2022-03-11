@@ -1,4 +1,4 @@
-﻿namespace FindText
+namespace FindText
 {
     partial class FormMain
     {
@@ -251,6 +251,8 @@
             // 
             // textBoxResult
             // 
+            this.textBoxResult.AcceptsReturn = true;
+            this.textBoxResult.AcceptsTab = true;
             this.textBoxResult.BackColor = System.Drawing.SystemColors.WindowText;
             this.textBoxResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxResult.ForeColor = System.Drawing.SystemColors.Window;
@@ -330,6 +332,7 @@
             // 
             // FormMain
             // 
+            this.AcceptButton = this.buttonStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 545);
