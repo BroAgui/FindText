@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,16 +20,6 @@ namespace FindText
             checkBoxWrap.CheckedChanged += CheckBoxWrap_CheckedChanged;
             FormClosing += FormMain_FormClosing;
             textBoxKeyWord.AutoCompleteCustomSource = inputHistory;
-            KeyPreview = true;
-            KeyDown += FormMain_KeyDown;
-        }
-
-        private void FormMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && !textBoxResult.Focused)
-            {
-                ButtonStart_Click(null, null);
-            }
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -40,17 +30,13 @@ namespace FindText
 
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBoxResult.Text))
+            if (!string.IsNullOrWhiteSpace(textBoxResult.Text))
             {
-                return;
+                Clipboard.SetText(textBoxResult.Text);
             }
-            Clipboard.SetText(textBoxResult.Text);
         }
 
-        private void CheckBoxWrap_CheckedChanged(object sender, EventArgs e)
-        {
-            textBoxResult.WordWrap = checkBoxWrap.Checked;
-        }
+        private void CheckBoxWrap_CheckedChanged(object sender, EventArgs e) => textBoxResult.WordWrap = checkBoxWrap.Checked;
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
@@ -96,10 +82,6 @@ namespace FindText
             {
                 pattern = "*" + pattern;
             }
-            //else if (!pattern.StartsWith( "*"))
-            //{
-            //    pattern = "*." + pattern;
-            //}
             try
             {
                 GetResult(textBoxFolder.Text, pattern, textBoxKeyWord.Text, (int)numericUpDownLenth.Value);
